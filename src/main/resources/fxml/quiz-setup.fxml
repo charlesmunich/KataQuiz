@@ -19,9 +19,9 @@
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
             <Label text="Number of Questions" />
-            <TextField fx:id="numQuestions" />
+            <TextField fx:id="numQuestionsField" />
          </children>
       </HBox>
-      <Button mnemonicParsing="false" text="Begin" />
+      <Button mnemonicParsing="false" onAction="#beginQuiz" text="Begin" />
    </children>
 </VBox>
