@@ -30,9 +30,11 @@ public class TriviaApiClient {
 
     public List<Category> fetchCategories() {
         try{
-            HttpRequest request = HttpRequest.newBuilder().uri(URI.create(CATEGORY_URL)).GET().build();
+            HttpRequest request =
+                    HttpRequest.newBuilder().uri(URI.create(CATEGORY_URL)).GET().build();
 
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response =
+                    client.send(request, HttpResponse.BodyHandlers.ofString());
 
             JsonObject root = JsonParser.parseString(response.body()).getAsJsonObject();
             JsonArray categoriesJson = root.getAsJsonArray("trivia_categories");
@@ -58,11 +60,17 @@ public class TriviaApiClient {
 
     public List<Question> fetchQuestions(int categoryId, int amount){
         try{
-            String url = QUESTION_URL + "?amount=" + amount + "&category=" + categoryId + "&type=multiple";
+            String url =
+                    QUESTION_URL +
+                            "?amount=" + amount +
+                            "&category=" + categoryId +
+                            "&type=multiple";
 
-            HttpRequest request = HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
+            HttpRequest request =
+                    HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
 
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response =
+                    client.send(request, HttpResponse.BodyHandlers.ofString());
 
             JsonObject root = JsonParser.parseString(response.body()).getAsJsonObject();
 

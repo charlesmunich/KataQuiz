@@ -1,6 +1,6 @@
 package com.charles.kataquiz.controller;
 
-import com.charles.kataquiz.*;
+import com.charles.kataquiz.QuizApp;
 import com.charles.kataquiz.model.Question;
 import com.charles.kataquiz.service.HintService;
 import com.charles.kataquiz.service.QuizService;

@@ -45,21 +45,4 @@ public class Question {
     public String getDifficulty() {
         return this.difficulty;
     }
-
-    @Override
-    public String toString() {
-        return String.format(
-                "Question:\n" +
-                        "  Category   : %s\n" +
-                        "  Difficulty : %s\n" +
-                        "  Text       : %s\n" +
-                        "  Correct    : %s\n" +
-                        "  Incorrect  : %s\n",
-                category,
-                difficulty,
-                questionText,
-                correctAnswer,
-                incorrectAnswers
-        );
-    }
 }

@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.util.Objects;
 import java.util.function.Consumer;
 
 public class QuizApp extends Application {
@@ -25,10 +27,10 @@ public class QuizApp extends Application {
     public static void setScene(String fxml) {
         try {
             Parent root = FXMLLoader.load(
-                    QuizApp.class.getResource("/fxml/" + fxml)
+                    Objects.requireNonNull(QuizApp.class.getResource("/fxml/" + fxml))
             );
             primaryStage.setScene(new Scene(root));
-        } catch (Exception e) {
+        } catch (NullPointerException | IOException e) {
             throw new RuntimeException("Failed to load " + fxml, e);
         }
     }

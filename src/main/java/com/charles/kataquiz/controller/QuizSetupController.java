@@ -5,7 +5,6 @@ import com.charles.kataquiz.model.Category;
 import com.charles.kataquiz.model.Question;
 import com.charles.kataquiz.QuizApp;
 import com.charles.kataquiz.service.QuizSetupService;
-import com.charles.kataquiz.service.TriviaApiClient;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -22,7 +21,7 @@ public class QuizSetupController {
 
     private Category selectedCategory;
 
-    QuizSetupService service = new QuizSetupService();
+    private final QuizSetupService service = new QuizSetupService();
 
     @FXML
     public void initialize() {
@@ -36,7 +35,8 @@ public class QuizSetupController {
                 int numQuestions = Integer.parseInt(numQuestionsField.getText());
 
                 if(selectedCategory != null){
-                    List<Question> questions = this.service.createQuiz(selectedCategory, numQuestions);
+                    List<Question> questions =
+                            this.service.createQuiz(selectedCategory, numQuestions);
 
                     QuizApp.setScene("quiz.fxml", controller -> {
                         QuizController quizController = (QuizController) controller;
@@ -49,7 +49,7 @@ public class QuizSetupController {
                 QuizApp.showInfoPopup("Number of questions must be defined.");
             }
         } catch (NumberFormatException e){
-            QuizApp.showInfoPopup("Please enter a valid number."); //TODO set bounds to prevent needing pagnation
+            QuizApp.showInfoPopup("Please enter a valid number.");
         } catch (TriviaApiException e){
             QuizApp.setScene("home.fxml");
             QuizApp.showInfoPopup(e.getMessage());
@@ -65,7 +65,7 @@ public class QuizSetupController {
             for(Category category : categories){
                 MenuItem item = new MenuItem(category.getName());
 
-                item.setOnAction(e -> {
+                item.setOnAction(_ -> {
                     this.categoryMenu.setText(category.getName());
                     this.selectedCategory = category;
                 });
