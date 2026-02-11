@@ -8,7 +8,6 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class QuizSetupController {
@@ -34,13 +33,12 @@ public class QuizSetupController {
 
         List<Question> questions = apiClient.fetchQuestions(selectedCategory.getId(), numQuestions);
 
-        for(Question question : questions){
-            System.out.println(question);
-        }
 
-//        QuizApp.setScene("quiz.fxml", controller -> {
-//            controller.startQuiz(questions);
-//        });
+        QuizApp.setScene("quiz.fxml", controller -> {
+            QuizController quizController = (QuizController) controller;
+            quizController.startQuiz(questions);
+        });
+
     }
 
     private void addCategories(){

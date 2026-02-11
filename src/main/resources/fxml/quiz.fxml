@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charles.kataquiz.controller.QuizSetupController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charles.kataquiz.controller.QuizController">
    <children>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
@@ -15,22 +15,22 @@
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <RadioButton fx:id="radioA" mnemonicParsing="false" text="RadioButton" />
+            <RadioButton fx:id="radioButtonA" mnemonicParsing="false" text="RadioButton" />
          </children>
       </HBox>
-      <HBox fx:id="radioB" prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <RadioButton mnemonicParsing="false" text="RadioButton" />
+            <RadioButton fx:id="radioButtonB" mnemonicParsing="false" text="RadioButton" />
          </children>
       </HBox>
-      <HBox fx:id="radioC" prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <RadioButton mnemonicParsing="false" text="RadioButton" />
+            <RadioButton fx:id="radioButtonC" mnemonicParsing="false" text="RadioButton" />
          </children>
       </HBox>
-      <HBox fx:id="radioD" prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <RadioButton mnemonicParsing="false" text="RadioButton" />
+            <RadioButton fx:id="radioButtonD" mnemonicParsing="false" text="RadioButton" />
          </children>
       </HBox>
       <HBox prefHeight="100.0" prefWidth="200.0">

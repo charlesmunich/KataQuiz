@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.function.Consumer;
+
 public class QuizApp extends Application {
 
     private static Stage primaryStage;
@@ -27,6 +29,22 @@ public class QuizApp extends Application {
             primaryStage.setScene(new Scene(root));
         } catch (Exception e) {
             throw new RuntimeException("Failed to load " + fxml, e);
+        }
+    }
+
+    public static <T> void setScene(String fxml, Consumer<T> controllerConsumer) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    QuizApp.class.getResource("/fxml/" + fxml)
+            );
+            Parent root = loader.load();
+
+            T controller = loader.getController();
+            controllerConsumer.accept(controller);
+
+            primaryStage.setScene(new Scene(root));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
