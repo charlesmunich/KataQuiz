@@ -1,5 +1,6 @@
 package com.charles.kataquiz.controller;
 
+import com.charles.kataquiz.Exception.TriviaApiException;
 import com.charles.kataquiz.model.Category;
 import com.charles.kataquiz.model.Question;
 import com.charles.kataquiz.QuizApp;
@@ -30,30 +31,49 @@ public class QuizSetupController {
 
     @FXML
     public void beginQuiz(){
-        // TODO verify categorie and numquestions
+        try{
+            if(!numQuestionsField.getText().isEmpty()){
+                int numQuestions = Integer.parseInt(numQuestionsField.getText());
 
-        int numQuestions = Integer.parseInt(numQuestionsField.getText());
+                if(selectedCategory != null){
+                    List<Question> questions = this.service.createQuiz(selectedCategory, numQuestions);
 
-        List<Question> questions = this.service.createQuiz(selectedCategory, numQuestions);
-
-        QuizApp.setScene("quiz.fxml", controller -> {
-            QuizController quizController = (QuizController) controller;
-            quizController.startQuiz(questions);
-        });
-
+                    QuizApp.setScene("quiz.fxml", controller -> {
+                        QuizController quizController = (QuizController) controller;
+                        quizController.startQuiz(questions);
+                    });
+                } else {
+                    QuizApp.showInfoPopup("Please select a category.");
+                }
+            } else {
+                QuizApp.showInfoPopup("Number of questions must be defined.");
+            }
+        } catch (NumberFormatException e){
+            QuizApp.showInfoPopup("Please enter a valid number."); //TODO set bounds to prevent needing pagnation
+        } catch (TriviaApiException e){
+            QuizApp.setScene("home.fxml");
+            QuizApp.showInfoPopup(e.getMessage());
+        }
     }
 
     private void addCategories(){
-        List<Category> categories = this.service.getCategories();
+        this.categoryMenu.getItems().clear();
 
-        for(Category category : categories){
-            MenuItem item = new MenuItem(category.getName());
+        try{
+            List<Category> categories = this.service.getCategories();
 
-            item.setOnAction(e -> {
-                this.categoryMenu.setText(category.getName());
-                this.selectedCategory = category;
-            });
-            this.categoryMenu.getItems().add(item);
+            for(Category category : categories){
+                MenuItem item = new MenuItem(category.getName());
+
+                item.setOnAction(e -> {
+                    this.categoryMenu.setText(category.getName());
+                    this.selectedCategory = category;
+                });
+                this.categoryMenu.getItems().add(item);
+            }
+        } catch (TriviaApiException e){
+            QuizApp.setScene("home.fxml");
+            QuizApp.showInfoPopup(e.getMessage());
         }
     }
 }

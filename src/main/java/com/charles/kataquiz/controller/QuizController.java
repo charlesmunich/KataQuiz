@@ -76,6 +76,8 @@ public class QuizController {
                 this.quizService.nextQuestion();
                 loadQuestion();
             }
+        } else {
+            QuizApp.showInfoPopup("Please select an answer.");
         }
     }
 }

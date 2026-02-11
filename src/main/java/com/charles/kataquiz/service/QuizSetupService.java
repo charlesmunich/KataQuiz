@@ -1,8 +1,11 @@
 package com.charles.kataquiz.service;
 
+import com.charles.kataquiz.Exception.TriviaApiException;
+import com.charles.kataquiz.QuizApp;
 import com.charles.kataquiz.model.Category;
 import com.charles.kataquiz.model.Question;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class QuizSetupService {
@@ -13,10 +16,10 @@ public class QuizSetupService {
     }
 
     public List<Category> getCategories() {
-        return apiClient.fetchCategories();
+        return this.apiClient.fetchCategories();
     }
 
     public List<Question> createQuiz(Category category, int numQuestions) {
-        return apiClient.fetchQuestions(category.getId(), numQuestions);
+        return this.apiClient.fetchQuestions(category.getId(), numQuestions);
     }
 }

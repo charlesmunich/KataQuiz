@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 import java.util.function.Consumer;
@@ -44,11 +45,23 @@ public class QuizApp extends Application {
 
             primaryStage.setScene(new Scene(root));
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to load " + fxml, e);
         }
     }
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static void showInfoPopup(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        //alert.getDialogPane().getStylesheets().add(STYLESHEET);
+        alert.getDialogPane().getStyleClass().add("root");
+
+        alert.showAndWait();
     }
 }

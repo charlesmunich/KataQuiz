@@ -1,5 +1,6 @@
 package com.charles.kataquiz.service;
 
+import com.charles.kataquiz.Exception.TriviaApiException;
 import com.charles.kataquiz.util.HtmlDecoder;
 import com.charles.kataquiz.model.Category;
 import com.charles.kataquiz.model.Question;
@@ -47,13 +48,12 @@ public class TriviaApiClient {
             }
 
             return categories;
-        } catch (IOException e){
-            e.printStackTrace();
         } catch (InterruptedException e){
-            e.printStackTrace();
+            Thread.currentThread().interrupt();
+            throw new TriviaApiException("Fetch categories request interrupted.", e);
+        } catch (IOException e) {
+            throw new TriviaApiException("Failed to fetch categories.", e);
         }
-
-        throw new RuntimeException("Failed to fetch categories");
     }
 
     public List<Question> fetchQuestions(int categoryId, int amount){
@@ -68,7 +68,7 @@ public class TriviaApiClient {
 
             int responseCode = root.get("response_code").getAsInt();
             if(responseCode != 0){
-                throw new RuntimeException("Failed to fetch questions" + responseCode); // TODO what code?
+                throw new TriviaApiException("Bad response code: " + responseCode);
             }
 
             JsonArray results = root.getAsJsonArray("results");
@@ -99,12 +99,11 @@ public class TriviaApiClient {
             }
 
             return questions;
-        } catch (IOException e){
-            e.printStackTrace();
         } catch (InterruptedException e){
-            e.printStackTrace();
+            Thread.currentThread().interrupt();
+            throw new TriviaApiException("Fetch questions request interrupted.", e);
+        } catch (IOException e) {
+            throw new TriviaApiException("Failed to fetch questions.", e);
         }
-
-        throw new RuntimeException("Failed to fetch categories");
     }
 }
