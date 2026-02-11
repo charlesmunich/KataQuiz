@@ -18,10 +18,8 @@ public class QuizService {
         this.currentQuestionIndex = 0;
     }
 
-    // question index -> shuffled answers
     private final Map<Integer, List<String>> shuffledAnswers = new HashMap<>();
 
-    // question index, answer
     private final Map<Integer, String> answers = new HashMap<>();
 
     public Question getCurrentQuestion() {

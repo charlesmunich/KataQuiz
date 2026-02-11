@@ -10,20 +10,10 @@ public class Question {
     public String category;
     public String difficulty;
 
-    public Question(
-            String questionText,
-            String correctAnswer,
-            List<String> incorrectAnswers,
-            String difficulty,
-            String category
-    ) {
+    public Question(String questionText, String correctAnswer, List<String> incorrectAnswers) {
         this.questionText = questionText;
         this.correctAnswer = correctAnswer;
         this.incorrectAnswers = incorrectAnswers;
-        this.difficulty = difficulty;
-        this.category = category;
-        this.difficulty = difficulty;
-        this.category = category;
     }
 
     public String getQuestionText() {

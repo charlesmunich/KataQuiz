@@ -19,9 +19,14 @@
          <font>
             <Font size="20.0" />
          </font></Button>
-      <Button mnemonicParsing="false" prefHeight="45.0" prefWidth="140.0" text="Create Quiz">
+      <Button mnemonicParsing="false" onAction="#onCreateQuiz" prefHeight="45.0" prefWidth="140.0" text="Create Quiz">
          <font>
             <Font size="20.0" />
          </font></Button>
+      <Button mnemonicParsing="false" onAction="#onImport" prefHeight="45.0" prefWidth="140.0" text="Import">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </VBox>

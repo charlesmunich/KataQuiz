@@ -1,11 +1,8 @@
 package com.charles.kataquiz.service;
 
-import com.charles.kataquiz.Exception.TriviaApiException;
-import com.charles.kataquiz.QuizApp;
 import com.charles.kataquiz.model.Category;
 import com.charles.kataquiz.model.Question;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class QuizSetupService {

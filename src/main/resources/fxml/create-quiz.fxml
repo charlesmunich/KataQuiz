@@ -3,60 +3,119 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charles.kataquiz.controller.QuizSetupController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charles.kataquiz.controller.CreateQuizController">
    <children>
-      <Label text="Open Trivia Database Quiz">
+      <Label text="Create User Quiz">
          <font>
             <Font name="Inter Regular" size="40.0" />
          </font>
          <VBox.margin>
             <Insets bottom="20.0" />
          </VBox.margin></Label>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+      <VBox alignment="CENTER" prefHeight="101.0" prefWidth="700.0" spacing="10.0">
          <children>
             <HBox alignment="CENTER" prefWidth="200.0">
                <children>
-                  <Label text="Category: ">
+                  <Label text="Title">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <MenuButton fx:id="categoryMenu" mnemonicParsing="false" prefWidth="320.0">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </MenuButton>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefWidth="200.0">
-               <children>
-                  <Label text="Number of Questions: ">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="numQuestionsField">
+                  <TextField fx:id="titleField">
                      <font>
                         <Font size="18.0" />
                      </font>
                   </TextField>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#beginQuiz" text="Begin">
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
+            <HBox alignment="CENTER" prefWidth="200.0">
+               <children>
+                  <Label text="Author">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="authorField">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Question:" />
+                  <TextField fx:id="questionField" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Answer" />
+                  <TextField fx:id="answerField" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="False" />
+                  <TextField fx:id="falseField1" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="False" />
+                  <TextField fx:id="FalseField2" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="False" />
+                  <TextField fx:id="FalseField3" />
+               </children>
+            </HBox>
+         </children>
+         <effect>
+            <Glow />
+         </effect>
+      </VBox>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#addQuestion" text="Add Question">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#removeQuestion" text="Remove Question">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#export" text="Export">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Label fx:id="questionsData" text="Label" />
+            <Button mnemonicParsing="false" onAction="#previousQuestion" text="Previous">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#nextQuestion" text="Next">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
          </children>
-      </VBox>
+      </HBox>
    </children>
 </VBox>

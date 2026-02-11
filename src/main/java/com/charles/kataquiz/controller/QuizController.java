@@ -2,7 +2,6 @@ package com.charles.kataquiz.controller;
 
 import com.charles.kataquiz.QuizApp;
 import com.charles.kataquiz.model.Question;
-import com.charles.kataquiz.service.HintService;
 import com.charles.kataquiz.service.QuizService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,7 +12,6 @@ import javafx.scene.control.ToggleGroup;
 import java.util.List;
 
 public class QuizController {
-    private HintService hintService;
     private QuizService quizService;
 
     @FXML
@@ -119,5 +117,9 @@ public class QuizController {
         }
     }
 
+    public void startImportedQuiz(QuizService quizService) {
+        this.quizService = quizService;
+        loadQuestion();
+    }
 
 }

@@ -100,9 +100,7 @@ public class TriviaApiClient {
                 questions.add(new Question(
                         questionText,
                         correctAnswer,
-                        incorrectAnswers,
-                        difficulty,
-                        category
+                        incorrectAnswers
                 ));
             }
 
