@@ -1,6 +1,9 @@
 package com.charles.kataquiz.controller;
 
 import com.charles.kataquiz.*;
+import com.charles.kataquiz.model.Question;
+import com.charles.kataquiz.service.HintService;
+import com.charles.kataquiz.service.QuizService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -9,12 +12,8 @@ import javafx.scene.control.ToggleGroup;
 import java.util.List;
 
 public class QuizController {
-    private QuizService quizService;
     private HintService hintService;
-    private int currentQuestionIndex;
-    private int maxQuestionIndex;
-    private int score;
-    private boolean hintUsed;
+    private QuizService quizService;
 
     @FXML
     private Label questionLabel;
@@ -31,9 +30,7 @@ public class QuizController {
     @FXML
     private RadioButton radioButtonD;
 
-    ToggleGroup answerGroup;
-
-    private List<Question> questions;
+    private ToggleGroup answerGroup;
 
     @FXML
     private void initialize() {
@@ -46,31 +43,23 @@ public class QuizController {
     }
 
     public void startQuiz(List<Question> questions){
-        this.questions = questions;
-        this.maxQuestionIndex = questions.size() - 1;
-        this.currentQuestionIndex = 0;
-        this.score = 0;
-
+        this.quizService = new QuizService(questions);
         loadQuestion();
     }
 
     private void loadQuestion() {
         this.answerGroup.selectToggle(null);
 
-        Question question = questions.get(currentQuestionIndex);
+        Question question = this.quizService.getCurrentQuestion();
 
         questionLabel.setText(question.getQuestionText());
 
-        List<String> answers = AnswerUtil.combineAndShuffle(question);
+        List<String> answers = this.quizService.getShuffledAnswers(question);
 
         this.radioButtonA.setText(answers.get(0));
         this.radioButtonB.setText(answers.get(1));
         this.radioButtonC.setText(answers.get(2));
         this.radioButtonD.setText(answers.get(3));
-    }
-
-    public void startUserQuiz(UserQuiz quiz){
-
     }
 
     @FXML
@@ -79,30 +68,14 @@ public class QuizController {
             RadioButton selected = (RadioButton) answerGroup.getSelectedToggle();
 
             String selectedAnswer = selected.getText();
-            Question current = questions.get(currentQuestionIndex);
+            this.quizService.submitAnswer(selectedAnswer);
 
-            if(selectedAnswer.equals(current.getQuestionText())){
-                score++;
-            }
-
-            if(this.currentQuestionIndex >= maxQuestionIndex){
+            if(this.quizService.isOver()){
                 QuizApp.setScene("final-score.fxml");
             } else {
-                nextQuestion();
+                this.quizService.nextQuestion();
+                loadQuestion();
             }
         }
-    }
-
-    public void useFiftyFifty(){
-
-    }
-
-    public void nextQuestion(){
-        this.currentQuestionIndex++;
-        loadQuestion();
-    }
-
-    public void endQuiz(){
-
     }
 }

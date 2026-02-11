@@ -1,6 +1,8 @@
-package com.charles.kataquiz;
+package com.charles.kataquiz.service;
 
-import com.charles.kataquiz.controller.Category;
+import com.charles.kataquiz.util.HtmlDecoder;
+import com.charles.kataquiz.model.Category;
+import com.charles.kataquiz.model.Question;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

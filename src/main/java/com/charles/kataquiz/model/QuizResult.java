@@ -1,4 +1,4 @@
-package com.charles.kataquiz;
+package com.charles.kataquiz.model;
 
 public class QuizResult {
     public int score;

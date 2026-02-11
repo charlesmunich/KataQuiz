@@ -1,4 +1,4 @@
-package com.charles.kataquiz;
+package com.charles.kataquiz.model;
 
 import java.util.List;
 

@@ -1,0 +1,22 @@
+package com.charles.kataquiz.service;
+
+import com.charles.kataquiz.model.Category;
+import com.charles.kataquiz.model.Question;
+
+import java.util.List;
+
+public class QuizSetupService {
+    TriviaApiClient apiClient;
+
+    public QuizSetupService(){
+        this.apiClient = new TriviaApiClient();
+    }
+
+    public List<Category> getCategories() {
+        return apiClient.fetchCategories();
+    }
+
+    public List<Question> createQuiz(Category category, int numQuestions) {
+        return apiClient.fetchQuestions(category.getId(), numQuestions);
+    }
+}

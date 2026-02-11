@@ -1,4 +1,6 @@
-package com.charles.kataquiz;
+package com.charles.kataquiz.service;
+
+import com.charles.kataquiz.model.Question;
 
 import java.util.List;
 

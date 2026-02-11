@@ -1,14 +1,12 @@
-package com.charles.kataquiz;
+package com.charles.kataquiz.util;
+
+import com.charles.kataquiz.model.Question;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class AnswerUtil {
-    public AnswerUtil (){
-
-    }
-
     public static List<String> combineAndShuffle(Question question){
         List<String> answers = new ArrayList<String>();
 

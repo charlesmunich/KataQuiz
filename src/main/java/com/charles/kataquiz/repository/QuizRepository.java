@@ -1,4 +1,6 @@
-package com.charles.kataquiz;
+package com.charles.kataquiz.repository;
+
+import com.charles.kataquiz.model.UserQuiz;
 
 import java.nio.file.Path;
 

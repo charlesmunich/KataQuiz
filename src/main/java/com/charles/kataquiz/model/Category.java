@@ -1,4 +1,4 @@
-package com.charles.kataquiz.controller;
+package com.charles.kataquiz.model;
 
 public class Category {
     private final int id;
