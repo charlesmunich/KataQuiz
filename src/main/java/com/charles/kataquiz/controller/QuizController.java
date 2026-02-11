@@ -4,6 +4,7 @@ import com.charles.kataquiz.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ public class QuizController {
     private QuizService quizService;
     private HintService hintService;
     private int currentQuestionIndex;
+    private int maxQuestionIndex;
     private int score;
     private boolean hintUsed;
 
@@ -29,23 +31,42 @@ public class QuizController {
     @FXML
     private RadioButton radioButtonD;
 
+    ToggleGroup answerGroup;
+
+    private List<Question> questions;
+
+    @FXML
+    private void initialize() {
+        this.answerGroup = new ToggleGroup();
+
+        this.radioButtonA.setToggleGroup(answerGroup);
+        this.radioButtonB.setToggleGroup(answerGroup);
+        this.radioButtonC.setToggleGroup(answerGroup);
+        this.radioButtonD.setToggleGroup(answerGroup);
+    }
+
     public void startQuiz(List<Question> questions){
-        for (Question question : questions) {
-            questionLabel.setText(question.getQuestionText());
+        this.questions = questions;
+        this.maxQuestionIndex = questions.size() - 1;
+        this.currentQuestionIndex = 0;
+        this.score = 0;
 
-            List<String> answers = AnswerUtil.combineAndShuffle(question);
+        loadQuestion();
+    }
 
-            this.radioButtonA.setText(answers.get(0));
-            this.radioButtonB.setText(answers.get(1));
-            this.radioButtonC.setText(answers.get(2));
-            this.radioButtonD.setText(answers.get(3));
+    private void loadQuestion() {
+        this.answerGroup.selectToggle(null);
 
-            try {
-                Thread.sleep(500);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
+        Question question = questions.get(currentQuestionIndex);
+
+        questionLabel.setText(question.getQuestionText());
+
+        List<String> answers = AnswerUtil.combineAndShuffle(question);
+
+        this.radioButtonA.setText(answers.get(0));
+        this.radioButtonB.setText(answers.get(1));
+        this.radioButtonC.setText(answers.get(2));
+        this.radioButtonD.setText(answers.get(3));
     }
 
     public void startUserQuiz(UserQuiz quiz){
@@ -54,7 +75,22 @@ public class QuizController {
 
     @FXML
     public void submitAnswer(){
+        if(this.answerGroup.getSelectedToggle() != null){
+            RadioButton selected = (RadioButton) answerGroup.getSelectedToggle();
 
+            String selectedAnswer = selected.getText();
+            Question current = questions.get(currentQuestionIndex);
+
+            if(selectedAnswer.equals(current.getQuestionText())){
+                score++;
+            }
+
+            if(this.currentQuestionIndex >= maxQuestionIndex){
+                QuizApp.setScene("final-score.fxml");
+            } else {
+                nextQuestion();
+            }
+        }
     }
 
     public void useFiftyFifty(){
@@ -62,7 +98,8 @@ public class QuizController {
     }
 
     public void nextQuestion(){
-
+        this.currentQuestionIndex++;
+        loadQuestion();
     }
 
     public void endQuiz(){
