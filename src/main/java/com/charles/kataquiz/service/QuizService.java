@@ -3,47 +3,89 @@ package com.charles.kataquiz.service;
 import com.charles.kataquiz.model.Question;
 import com.charles.kataquiz.util.AnswerUtil;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class QuizService {
     private List<Question> questions;
     private int currentQuestionIndex;
     private int score;
     private boolean hintUsed;
-    private int maxQuestionIndex;
 
     public QuizService(List<Question> questions) {
         this.questions = questions;
         this.currentQuestionIndex = 0;
-        this.score = 0;
-        this.maxQuestionIndex = questions.size() - 1;
     }
+
+    // question index -> shuffled answers
+    private final Map<Integer, List<String>> shuffledAnswers = new HashMap<>();
+
+    // question index, answer
+    private final Map<Integer, String> answers = new HashMap<>();
 
     public Question getCurrentQuestion() {
         return questions.get(currentQuestionIndex);
     }
 
     public void submitAnswer(String selectedAnswer) {
-        Question current = getCurrentQuestion();
-
-        if(selectedAnswer.equals(current.getCorrectAnswer())){
-            score++;
-        }
+        this.answers.put(currentQuestionIndex, selectedAnswer);
     }
 
     public void nextQuestion(){
         this.currentQuestionIndex++;
     }
 
-    public int getScore(){
-        return this.score;
+    public void previousQuestion(){
+        this.currentQuestionIndex--;
     }
 
-    public boolean isOver(){
-        return this.currentQuestionIndex >= maxQuestionIndex;
+    public boolean isFirstQuestion(){
+        return this.currentQuestionIndex == 0;
+    }
+
+    public boolean isLastQuestion(){
+        return this.currentQuestionIndex == questions.size() - 1;
     }
 
     public List<String> getShuffledAnswers(Question question) {
-        return AnswerUtil.combineAndShuffle(question);
+        if (shuffledAnswers.containsKey(currentQuestionIndex)) {
+            return shuffledAnswers.get(currentQuestionIndex);
+        }
+
+        List<String> shuffled = AnswerUtil.combineAndShuffle(question);
+        shuffledAnswers.put(currentQuestionIndex, shuffled);
+
+        return shuffled;
     }
+
+
+    public String getSavedAnswer() {
+        return this.answers.get(currentQuestionIndex);
+    }
+
+    public int getCurrentQuestionNumber(){
+        return this.currentQuestionIndex + 1;
+    }
+
+    public int getTotalNumberOfQuestions(){
+        return this.questions.size();
+    }
+
+    public int getFinalScore() {
+        this.score = 0;
+
+        for (int i = 0; i < questions.size(); i++) {
+
+            String userAnswer = answers.get(i);
+            String correctAnswer = questions.get(i).getCorrectAnswer();
+
+            if (userAnswer != null && userAnswer.equals(correctAnswer)) {
+                score++;
+            }
+        }
+
+        return this.score;
+    }
+
 }

@@ -5,6 +5,7 @@ import com.charles.kataquiz.model.Question;
 import com.charles.kataquiz.service.HintService;
 import com.charles.kataquiz.service.QuizService;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -29,6 +30,12 @@ public class QuizController {
 
     @FXML
     private RadioButton radioButtonD;
+
+    @FXML
+    private Button nextButton;
+
+    @FXML
+    private Label questionNumber;
 
     private ToggleGroup answerGroup;
 
@@ -60,18 +67,41 @@ public class QuizController {
         this.radioButtonB.setText(answers.get(1));
         this.radioButtonC.setText(answers.get(2));
         this.radioButtonD.setText(answers.get(3));
+
+        String savedAnswer = this.quizService.getSavedAnswer();
+
+        if (savedAnswer != null) {
+            for (RadioButton rb : List.of(radioButtonA, radioButtonB, radioButtonC, radioButtonD)) {
+                if (rb.getText().equals(savedAnswer)) {
+                    answerGroup.selectToggle(rb);
+                    break;
+                }
+            }
+        }
+
+        if(this.quizService.isLastQuestion()){
+            this.nextButton.setText("Submit");
+        } else {
+            this.nextButton.setText("Next");
+        }
+
+        this.questionNumber.setText(this.quizService.getCurrentQuestionNumber() + " / " + this.quizService.getTotalNumberOfQuestions());
     }
 
     @FXML
-    public void submitAnswer(){
+    public void nextQuestion(){
         if(this.answerGroup.getSelectedToggle() != null){
             RadioButton selected = (RadioButton) answerGroup.getSelectedToggle();
 
             String selectedAnswer = selected.getText();
             this.quizService.submitAnswer(selectedAnswer);
 
-            if(this.quizService.isOver()){
-                QuizApp.setScene("final-score.fxml");
+            if(this.quizService.isLastQuestion()){
+
+                QuizApp.setScene("final-score.fxml", controller -> {
+                    FinalScoreController finalScoreController = (FinalScoreController) controller;
+                    finalScoreController.init(this.quizService);
+                });
             } else {
                 this.quizService.nextQuestion();
                 loadQuestion();
@@ -80,4 +110,14 @@ public class QuizController {
             QuizApp.showInfoPopup("Please select an answer.");
         }
     }
+
+    @FXML
+    public void previousQuestion(){
+        if(!this.quizService.isFirstQuestion()){
+            this.quizService.previousQuestion();
+            loadQuestion();
+        }
+    }
+
+
 }

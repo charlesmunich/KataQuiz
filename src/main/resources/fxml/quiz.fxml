@@ -39,13 +39,19 @@
       </RadioButton>
       <VBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="550.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#submitAnswer" prefWidth="100.0" text="Next">
+            <Button fx:id="nextButton" mnemonicParsing="false" onAction="#nextQuestion" prefWidth="100.0" text="Next">
                <font>
                   <Font size="18.0" />
                </font>
                <VBox.margin>
                   <Insets right="100.0" top="25.0" />
                </VBox.margin>
+            </Button>
+            <Label fx:id="questionNumber" text="Label" />
+            <Button mnemonicParsing="false" onAction="#previousQuestion" prefWidth="100.0" text="Back">
+               <font>
+                  <Font size="18.0" />
+               </font>
             </Button>
          </children>
       </VBox>
