@@ -1,7 +1,8 @@
 package com.charles.kataquiz.controller;
 
-import com.charles.kataquiz.model.UserQuestion;
-import com.charles.kataquiz.model.UserQuiz;
+import com.charles.kataquiz.QuizApp;
+import com.charles.kataquiz.model.Question;
+import com.charles.kataquiz.model.Quiz;
 import com.charles.kataquiz.repository.QuizRepository;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -12,7 +13,7 @@ import java.io.File;
 
 public class CreateQuizController {
 
-    private UserQuiz quiz = new UserQuiz();
+    private Quiz quiz = new Quiz();
     private int currentIndex = 0;
 
     @FXML
@@ -46,7 +47,7 @@ public class CreateQuizController {
     }
 
     private void saveCurrentQuestion() {
-        UserQuestion q = quiz.getQuestions().get(currentIndex);
+        Question q = quiz.getQuestions().get(currentIndex);
 
         q.setQuestionText(questionField.getText());
         q.setCorrectAnswer(answerField.getText());
@@ -56,7 +57,7 @@ public class CreateQuizController {
     }
 
     private void loadQuestion() {
-        UserQuestion q = quiz.getQuestions().get(currentIndex);
+        Question q = quiz.getQuestions().get(currentIndex);
 
         questionField.setText(q.getQuestionText());
         answerField.setText(q.getCorrectAnswer());
@@ -118,7 +119,9 @@ public class CreateQuizController {
     private void export() {
 
         saveCurrentQuestion();
-        quiz.init(titleField.getText(), authorField.getText()); //TODO change out with getters
+
+        this.quiz.setTitle(titleField.getText());
+        this.quiz.setAuthor(authorField.getText());
 
         if (quiz.getTotalQuestions() < 1) {
             return;
@@ -145,4 +148,8 @@ public class CreateQuizController {
         return fs;
     }
 
+    @FXML
+    private void goHome(){
+        QuizApp.setScene("home.fxml");
+    }
 }

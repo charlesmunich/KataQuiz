@@ -24,5 +24,10 @@
          <font>
             <Font size="18.0" />
          </font></Button>
+      <Button mnemonicParsing="false" onAction="#onExport" prefWidth="100.0" text="Export">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
    </children>
 </VBox>

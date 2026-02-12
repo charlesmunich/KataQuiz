@@ -3,8 +3,7 @@ package com.charles.kataquiz.service;
 import com.charles.kataquiz.QuizApp;
 import com.charles.kataquiz.controller.QuizController;
 import com.charles.kataquiz.model.Question;
-import com.charles.kataquiz.model.UserQuestion;
-import com.charles.kataquiz.model.UserQuiz;
+import com.charles.kataquiz.model.Quiz;
 import com.charles.kataquiz.repository.QuizRepository;
 
 import java.nio.file.Path;
@@ -17,11 +16,11 @@ public class ImportService {
 
         QuizRepository repository = new QuizRepository();
 
-        UserQuiz userQuiz = repository.loadQuiz(path);
+        Quiz quiz = repository.loadQuiz(path);
 
         List<Question> questions = new ArrayList<>();
 
-        for (UserQuestion uq : userQuiz.getQuestions()) {
+        for (Question uq : quiz.getQuestions()) {
 
             Question q = new Question(
                     uq.getQuestionText(),

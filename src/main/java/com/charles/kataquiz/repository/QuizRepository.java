@@ -1,6 +1,6 @@
 package com.charles.kataquiz.repository;
 
-import com.charles.kataquiz.model.UserQuiz;
+import com.charles.kataquiz.model.Quiz;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -14,7 +14,7 @@ public class QuizRepository {
             .setPrettyPrinting()
             .create();
 
-    public void saveQuiz(UserQuiz quiz, Path path) {
+    public void saveQuiz(Quiz quiz, Path path) {
         try {
             String json = gson.toJson(quiz);
             Files.writeString(path, json);
@@ -23,11 +23,11 @@ public class QuizRepository {
         }
     }
 
-    public UserQuiz loadQuiz(Path path) {
+    public Quiz loadQuiz(Path path) {
 
         try {
             String json = Files.readString(path);
-            return gson.fromJson(json, UserQuiz.class);
+            return gson.fromJson(json, Quiz.class);
         } catch (IOException e) {
             throw new RuntimeException("Failed to load quiz", e);
         }

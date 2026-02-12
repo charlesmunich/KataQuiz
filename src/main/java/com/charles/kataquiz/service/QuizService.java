@@ -86,4 +86,8 @@ public class QuizService {
         return this.score;
     }
 
+    public List<Question> getQuestions() {
+        return this.questions;
+    }
+
 }

@@ -8,8 +8,6 @@ My submission for Direct Supply's Kata technical project.
 - Right now, quiz titles and author are saved to the quiz filename, further implementation would store data to display quiz information to the user while taking the quiz
 
 # TODO
-- Allow export of OTB quiz?
-- Create quiz need home button.
 - Major UI refactoring
 - CSS stylesheet
 - Test edge cases

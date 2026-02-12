@@ -1,5 +1,6 @@
 package com.charles.kataquiz.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Question {
@@ -8,7 +9,15 @@ public class Question {
     public String correctAnswer;
     public List<String> incorrectAnswers;
     public String category;
-    public String difficulty;
+
+    public Question() {
+        this.questionText = "";
+        this.correctAnswer = "";
+        this.incorrectAnswers = new ArrayList<>();
+        this.incorrectAnswers.add("");
+        this.incorrectAnswers.add("");
+        this.incorrectAnswers.add("");
+    }
 
     public Question(String questionText, String correctAnswer, List<String> incorrectAnswers) {
         this.questionText = questionText;
@@ -28,11 +37,15 @@ public class Question {
         return this.incorrectAnswers;
     }
 
-    public String getCategory() {
-        return this.category;
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
     }
 
-    public String getDifficulty() {
-        return this.difficulty;
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public void setIncorrectAnswer(int index, String value) {
+        this.incorrectAnswers.set(index, value);
     }
 }
