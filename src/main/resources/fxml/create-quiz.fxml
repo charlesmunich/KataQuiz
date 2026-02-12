@@ -73,13 +73,13 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="False" />
-                  <TextField fx:id="FalseField2" />
+                  <TextField fx:id="falseField2" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label text="False" />
-                  <TextField fx:id="FalseField3" />
+                  <TextField fx:id="falseField3" />
                </children>
             </HBox>
          </children>
@@ -104,7 +104,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Label fx:id="questionsData" text="Label" />
+            <Label fx:id="questionCounter" text="Label" />
             <Button mnemonicParsing="false" onAction="#previousQuestion" text="Previous">
                <font>
                   <Font size="18.0" />

@@ -46,46 +46,7 @@ public class QuizController {
         this.radioButtonC.setToggleGroup(answerGroup);
         this.radioButtonD.setToggleGroup(answerGroup);
     }
-
-    public void startQuiz(List<Question> questions){
-        this.quizService = new QuizService(questions);
-        loadQuestion();
-    }
-
-    private void loadQuestion() {
-        this.answerGroup.selectToggle(null);
-
-        Question question = this.quizService.getCurrentQuestion();
-
-        questionLabel.setText(question.getQuestionText());
-
-        List<String> answers = this.quizService.getShuffledAnswers(question);
-
-        this.radioButtonA.setText(answers.get(0));
-        this.radioButtonB.setText(answers.get(1));
-        this.radioButtonC.setText(answers.get(2));
-        this.radioButtonD.setText(answers.get(3));
-
-        String savedAnswer = this.quizService.getSavedAnswer();
-
-        if (savedAnswer != null) {
-            for (RadioButton rb : List.of(radioButtonA, radioButtonB, radioButtonC, radioButtonD)) {
-                if (rb.getText().equals(savedAnswer)) {
-                    answerGroup.selectToggle(rb);
-                    break;
-                }
-            }
-        }
-
-        if(this.quizService.isLastQuestion()){
-            this.nextButton.setText("Submit");
-        } else {
-            this.nextButton.setText("Next");
-        }
-
-        this.questionNumber.setText(this.quizService.getCurrentQuestionNumber() + " / " + this.quizService.getTotalNumberOfQuestions());
-    }
-
+    //TODO disable next
     @FXML
     public void nextQuestion(){
         if(this.answerGroup.getSelectedToggle() != null){
@@ -100,6 +61,7 @@ public class QuizController {
                     FinalScoreController finalScoreController = (FinalScoreController) controller;
                     finalScoreController.init(this.quizService);
                 });
+
             } else {
                 this.quizService.nextQuestion();
                 loadQuestion();
@@ -114,12 +76,60 @@ public class QuizController {
         if(!this.quizService.isFirstQuestion()){
             this.quizService.previousQuestion();
             loadQuestion();
+        } else {
+            // TODO block back
         }
+    }
+
+    public void startQuiz(List<Question> questions){
+        this.quizService = new QuizService(questions);
+        loadQuestion();
+    }
+
+    private void loadQuestion() {
+        this.answerGroup.selectToggle(null);
+
+        Question question = this.quizService.getCurrentQuestion();
+
+        this.questionLabel.setText(question.getQuestionText());
+
+        List<String> answers = this.quizService.getShuffledAnswers(question);
+
+        this.radioButtonA.setText(answers.get(0));
+        this.radioButtonB.setText(answers.get(1));
+        this.radioButtonC.setText(answers.get(2));
+        this.radioButtonD.setText(answers.get(3));
+
+        String savedAnswer = this.quizService.getSavedAnswer();
+
+        if (savedAnswer != null) {
+            for (RadioButton rb : List.of(
+                    this.radioButtonA,
+                    this.radioButtonB,
+                    this.radioButtonC,
+                    this.radioButtonD
+            )) {
+                if (rb.getText().equals(savedAnswer)) {
+                    answerGroup.selectToggle(rb);
+                    break;
+                }
+            }
+        }
+
+        if(this.quizService.isLastQuestion()){
+            this.nextButton.setText("Submit");
+        } else {
+            this.nextButton.setText("Next");
+        }
+
+        this.questionNumber.setText(
+                this.quizService.getCurrentQuestionNumber()
+                        + " / "
+                        + this.quizService.getTotalNumberOfQuestions());
     }
 
     public void startImportedQuiz(QuizService quizService) {
         this.quizService = quizService;
         loadQuestion();
     }
-
 }

@@ -6,7 +6,7 @@ import com.charles.kataquiz.model.Question;
 import java.util.List;
 
 public class QuizSetupService {
-    TriviaApiClient apiClient;
+    private TriviaApiClient apiClient;
 
     public QuizSetupService(){
         this.apiClient = new TriviaApiClient();
@@ -17,6 +17,6 @@ public class QuizSetupService {
     }
 
     public List<Question> createQuiz(Category category, int numQuestions) {
-        return this.apiClient.fetchQuestions(category.getId(), numQuestions);
+        return this.apiClient.fetchQuestions(category.id(), numQuestions);
     }
 }

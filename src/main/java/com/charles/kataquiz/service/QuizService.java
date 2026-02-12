@@ -10,20 +10,12 @@ import java.util.Map;
 public class QuizService {
     private List<Question> questions;
     private int currentQuestionIndex;
-    private int score;
-    private boolean hintUsed;
+    private final Map<Integer, List<String>> shuffledAnswers = new HashMap<>();
+    private final Map<Integer, String> answers = new HashMap<>();
 
     public QuizService(List<Question> questions) {
         this.questions = questions;
         this.currentQuestionIndex = 0;
-    }
-
-    private final Map<Integer, List<String>> shuffledAnswers = new HashMap<>();
-
-    private final Map<Integer, String> answers = new HashMap<>();
-
-    public Question getCurrentQuestion() {
-        return questions.get(currentQuestionIndex);
     }
 
     public void submitAnswer(String selectedAnswer) {
@@ -57,6 +49,29 @@ public class QuizService {
         return shuffled;
     }
 
+    public int getFinalScore() {
+        int score = 0;
+
+        for (int i = 0; i < this.questions.size(); i++) {
+
+            String userAnswer = this.answers.get(i);
+            String correctAnswer = this.questions.get(i).getCorrectAnswer();
+
+            if (userAnswer != null && userAnswer.equals(correctAnswer)) {
+                score++;
+            }
+        }
+
+        return score;
+    }
+
+    public List<Question> getQuestions() {
+        return this.questions;
+    }
+
+    public Question getCurrentQuestion() {
+        return questions.get(currentQuestionIndex);
+    }
 
     public String getSavedAnswer() {
         return this.answers.get(currentQuestionIndex);
@@ -69,25 +84,4 @@ public class QuizService {
     public int getTotalNumberOfQuestions(){
         return this.questions.size();
     }
-
-    public int getFinalScore() {
-        this.score = 0;
-
-        for (int i = 0; i < questions.size(); i++) {
-
-            String userAnswer = answers.get(i);
-            String correctAnswer = questions.get(i).getCorrectAnswer();
-
-            if (userAnswer != null && userAnswer.equals(correctAnswer)) {
-                score++;
-            }
-        }
-
-        return this.score;
-    }
-
-    public List<Question> getQuestions() {
-        return this.questions;
-    }
-
 }

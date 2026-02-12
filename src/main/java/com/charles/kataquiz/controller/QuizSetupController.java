@@ -13,15 +13,16 @@ import javafx.scene.control.TextField;
 import java.util.List;
 
 public class QuizSetupController {
+
+    private Category selectedCategory;
+
+    private final QuizSetupService service = new QuizSetupService();
+
     @FXML
     private MenuButton categoryMenu;
 
     @FXML
     private TextField numQuestionsField;
-
-    private Category selectedCategory;
-
-    private final QuizSetupService service = new QuizSetupService();
 
     @FXML
     public void initialize() {
@@ -63,10 +64,10 @@ public class QuizSetupController {
             List<Category> categories = this.service.getCategories();
 
             for(Category category : categories){
-                MenuItem item = new MenuItem(category.getName());
+                MenuItem item = new MenuItem(category.name());
 
                 item.setOnAction(_ -> {
-                    this.categoryMenu.setText(category.getName());
+                    this.categoryMenu.setText(category.name());
                     this.selectedCategory = category;
                 });
                 this.categoryMenu.getItems().add(item);

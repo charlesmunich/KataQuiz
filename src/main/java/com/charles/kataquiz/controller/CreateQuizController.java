@@ -13,8 +13,8 @@ import java.io.File;
 
 public class CreateQuizController {
 
-    private Quiz quiz = new Quiz();
-    private int currentIndex = 0;
+    private Quiz quiz;
+    private int currentIndex;
 
     @FXML
     private TextField titleField;
@@ -32,60 +32,55 @@ public class CreateQuizController {
     private TextField falseField1;
 
     @FXML
-    private TextField FalseField2;
+    private TextField falseField2;
 
     @FXML
-    private TextField FalseField3;
+    private TextField falseField3;
 
     @FXML
-    private Label questionsData;
+    private Label questionCounter;
 
     @FXML
     public void initialize() {
+        this.quiz = new Quiz();
+        this.currentIndex = 0;
+
         loadQuestion();
         updateCounter();
     }
 
+    @FXML
+    private void goHome(){
+        QuizApp.setScene("home.fxml");
+    }
+
     private void saveCurrentQuestion() {
-        Question q = quiz.getQuestions().get(currentIndex);
+        Question question = quiz.getQuestions().get(this.currentIndex);
 
-        q.setQuestionText(questionField.getText());
-        q.setCorrectAnswer(answerField.getText());
-        q.setIncorrectAnswer(0, falseField1.getText());
-        q.setIncorrectAnswer(1, FalseField2.getText());
-        q.setIncorrectAnswer(2, FalseField3.getText());
-    }
-
-    private void loadQuestion() {
-        Question q = quiz.getQuestions().get(currentIndex);
-
-        questionField.setText(q.getQuestionText());
-        answerField.setText(q.getCorrectAnswer());
-        falseField1.setText(q.getIncorrectAnswers().get(0));
-        FalseField2.setText(q.getIncorrectAnswers().get(1));
-        FalseField3.setText(q.getIncorrectAnswers().get(2));
-    }
-
-    private void updateCounter() {
-        questionsData.setText((currentIndex + 1) + " / " + quiz.getTotalQuestions());
+        question.setQuestionText(this.questionField.getText());
+        question.setCorrectAnswer(this.answerField.getText());
+        question.setIncorrectAnswer(0, falseField1.getText());
+        question.setIncorrectAnswer(1, falseField2.getText());
+        question.setIncorrectAnswer(2, falseField3.getText());
     }
 
     @FXML
     private void addQuestion() {
         saveCurrentQuestion();
-        quiz.addQuestion();
-        currentIndex = quiz.getTotalQuestions() - 1;
+
+        this.quiz.addQuestion();
+        this.currentIndex = this.quiz.getTotalQuestions() - 1;
         loadQuestion();
         updateCounter();
     }
 
     @FXML
     private void removeQuestion() {
-        if (quiz.getTotalQuestions() > 1) {
-            quiz.removeQuestion(currentIndex);
+        if (this.quiz.getTotalQuestions() > 1) {
+            this.quiz.removeQuestion(this.currentIndex);
 
-            if (currentIndex >= quiz.getTotalQuestions()) {
-                currentIndex = quiz.getTotalQuestions() - 1;
+            if (this.currentIndex >= this.quiz.getTotalQuestions()) {
+                this.currentIndex = this.quiz.getTotalQuestions() - 1;
             }
 
             loadQuestion();
@@ -97,8 +92,8 @@ public class CreateQuizController {
     private void nextQuestion() {
         saveCurrentQuestion();
 
-        if (currentIndex < quiz.getTotalQuestions() - 1) {
-            currentIndex++;
+        if (this.currentIndex < this.quiz.getTotalQuestions() - 1) {
+            this.currentIndex++;
             loadQuestion();
             updateCounter();
         }
@@ -108,8 +103,8 @@ public class CreateQuizController {
     private void previousQuestion() {
         saveCurrentQuestion();
 
-        if (currentIndex > 0) {
-            currentIndex--;
+        if (this.currentIndex > 0) {
+            this.currentIndex--;
             loadQuestion();
             updateCounter();
         }
@@ -117,39 +112,50 @@ public class CreateQuizController {
 
     @FXML
     private void export() {
-
         saveCurrentQuestion();
 
-        this.quiz.setTitle(titleField.getText());
-        this.quiz.setAuthor(authorField.getText());
+        if (this.quiz.getTotalQuestions() > 1) {
+            FileChooser fc = createFileChooser();
+            File file = fc.showSaveDialog(this.questionField.getScene().getWindow());
 
-        if (quiz.getTotalQuestions() < 1) {
-            return;
+            if (file != null) {
+                new QuizRepository().saveQuiz(this.quiz, file.toPath());
+            } else {
+                QuizApp.showInfoPopup("No path chosen, export aborted.");
+            }
         }
+    }
 
-        FileChooser fc = createFileChooser();
-        File file = fc.showSaveDialog(questionField.getScene().getWindow());
-        if (file != null) {
-            new QuizRepository().saveQuiz(this.quiz, file.toPath());
-        }
+    private void loadQuestion() {
+        Question question = this.quiz.getQuestions().get(this.currentIndex);
+
+        this.questionField.setText(question.getQuestionText());
+        this.answerField.setText(question.getCorrectAnswer());
+        this.falseField1.setText(question.getIncorrectAnswers().get(0));
+        this.falseField2.setText(question.getIncorrectAnswers().get(1));
+        this.falseField3.setText(question.getIncorrectAnswers().get(2));
+    }
+
+    private void updateCounter() {
+        this.questionCounter.setText((this.currentIndex + 1)
+                + " / "
+                + this.quiz.getTotalQuestions());
     }
 
     private FileChooser createFileChooser() {
         FileChooser fs = new FileChooser();
+        //TODO title and author null
+
         fs.setInitialDirectory(new File(System.getProperty("user.home")));
         fs.setTitle("Save Quiz");
         fs.getExtensionFilters()
                 .add(new FileChooser.ExtensionFilter("KataQuiz", "*.json"));
         fs.setInitialFileName(
-                titleField.getText().replaceAll("\\s", "-")
+                this.titleField.getText().replaceAll("\\s", "-")
                 + "-"
-                + authorField.getText().replaceAll("\\s", "-")
+                + this.authorField.getText().replaceAll("\\s", "-")
                 + ".json");
-        return fs;
-    }
 
-    @FXML
-    private void goHome(){
-        QuizApp.setScene("home.fxml");
+        return fs;
     }
 }

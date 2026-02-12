@@ -19,13 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TriviaApiClient {
-
-    private static final String CATEGORY_URL =
-            "https://opentdb.com/api_category.php";
-
-    private static final String QUESTION_URL =
-            "https://opentdb.com/api.php";
-
+    private static final String CATEGORY_URL = "https://opentdb.com/api_category.php";
+    private static final String QUESTION_URL = "https://opentdb.com/api.php";
     private final HttpClient client = HttpClient.newHttpClient();
 
     public List<Category> fetchCategories() {
@@ -87,8 +82,6 @@ public class TriviaApiClient {
 
                 String questionText = HtmlDecoder.decode(obj.get("question").getAsString());
                 String correctAnswer = HtmlDecoder.decode(obj.get("correct_answer").getAsString());
-                String difficulty = HtmlDecoder.decode(obj.get("difficulty").getAsString());
-                String category = HtmlDecoder.decode(obj.get("category").getAsString());
 
                 JsonArray incorrectJson = obj.getAsJsonArray("incorrect_answers");
 

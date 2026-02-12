@@ -12,7 +12,6 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class QuizApp extends Application {
-
     private static Stage primaryStage;
 
     @Override
@@ -22,6 +21,10 @@ public class QuizApp extends Application {
         stage.setResizable(false);
         setScene("home.fxml");
         stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
     }
 
     public static void setScene(String fxml) {
@@ -51,17 +54,12 @@ public class QuizApp extends Application {
         }
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     public static void showInfoPopup(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setHeaderText(null);
         alert.setContentText(message);
 
-        //alert.getDialogPane().getStylesheets().add(STYLESHEET);
         alert.getDialogPane().getStyleClass().add("root");
 
         alert.showAndWait();

@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Question {
-    public String questionText;
-
-    public String correctAnswer;
-    public List<String> incorrectAnswers;
-    public String category;
+    private String questionText;
+    private String correctAnswer;
+    private List<String> incorrectAnswers;
 
     public Question() {
         this.questionText = "";

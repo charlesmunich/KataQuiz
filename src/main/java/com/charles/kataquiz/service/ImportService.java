@@ -15,11 +15,9 @@ public class ImportService {
     public static void startQuiz(Path path) {
 
         QuizRepository repository = new QuizRepository();
-
         Quiz quiz = repository.loadQuiz(path);
 
         List<Question> questions = new ArrayList<>();
-
         for (Question uq : quiz.getQuestions()) {
 
             Question q = new Question(

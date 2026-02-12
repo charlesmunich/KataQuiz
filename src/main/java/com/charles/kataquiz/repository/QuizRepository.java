@@ -24,7 +24,6 @@ public class QuizRepository {
     }
 
     public Quiz loadQuiz(Path path) {
-
         try {
             String json = Files.readString(path);
             return gson.fromJson(json, Quiz.class);
