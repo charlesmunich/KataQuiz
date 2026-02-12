@@ -33,6 +33,9 @@ public class QuizController {
     private Button nextButton;
 
     @FXML
+    private Button backButton;
+
+    @FXML
     private Label questionNumber;
 
     private ToggleGroup answerGroup;
@@ -45,8 +48,21 @@ public class QuizController {
         this.radioButtonB.setToggleGroup(answerGroup);
         this.radioButtonC.setToggleGroup(answerGroup);
         this.radioButtonD.setToggleGroup(answerGroup);
+
+        nextButton.setDisable(true);
+        backButton.setDisable(true);
+
+        answerGroup.selectedToggleProperty().addListener((_, _, newToggle) -> {
+            nextButton.setDisable(newToggle == null);
+        });
+
     }
-    //TODO disable next
+
+    @FXML
+    private void goHome(){
+        QuizApp.setScene("home.fxml");
+    }
+
     @FXML
     public void nextQuestion(){
         if(this.answerGroup.getSelectedToggle() != null){
@@ -69,6 +85,7 @@ public class QuizController {
         } else {
             QuizApp.showInfoPopup("Please select an answer.");
         }
+        updateBackButton();
     }
 
     @FXML
@@ -76,9 +93,8 @@ public class QuizController {
         if(!this.quizService.isFirstQuestion()){
             this.quizService.previousQuestion();
             loadQuestion();
-        } else {
-            // TODO block back
         }
+        updateBackButton();
     }
 
     public void startQuiz(List<Question> questions){
@@ -131,5 +147,9 @@ public class QuizController {
     public void startImportedQuiz(QuizService quizService) {
         this.quizService = quizService;
         loadQuestion();
+    }
+
+    private void updateBackButton(){
+        backButton.setDisable(this.quizService.isFirstQuestion());
     }
 }

@@ -94,7 +94,7 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#removeQuestion" text="Remove Question">
+            <Button fx:id="removeQuestionButton" mnemonicParsing="false" onAction="#removeQuestion" text="Remove Question">
                <font>
                   <Font size="18.0" />
                </font>
@@ -105,12 +105,12 @@
                </font>
             </Button>
             <Label fx:id="questionCounter" text="Label" />
-            <Button mnemonicParsing="false" onAction="#previousQuestion" text="Previous">
+            <Button fx:id="previousButton" mnemonicParsing="false" onAction="#previousQuestion" text="Previous">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#nextQuestion" text="Next">
+            <Button fx:id="nextButton" mnemonicParsing="false" onAction="#nextQuestion" text="Next">
                <font>
                   <Font size="18.0" />
                </font>

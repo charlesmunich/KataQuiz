@@ -5,6 +5,7 @@ import com.charles.kataquiz.model.Question;
 import com.charles.kataquiz.model.Quiz;
 import com.charles.kataquiz.repository.QuizRepository;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -42,6 +43,15 @@ public class CreateQuizController {
     private TextField falseField3;
 
     @FXML
+    private Button removeQuestionButton;
+
+    @FXML
+    private Button previousButton;
+
+    @FXML
+    private Button nextButton;
+
+    @FXML
     private Label questionCounter;
 
     @FXML
@@ -50,7 +60,7 @@ public class CreateQuizController {
         this.currentIndex = 0;
 
         loadQuestion();
-        updateCounter();
+        updateUI();
     }
 
     @FXML
@@ -74,8 +84,9 @@ public class CreateQuizController {
 
         this.quiz.addQuestion();
         this.currentIndex = this.quiz.getTotalQuestions() - 1;
+
         loadQuestion();
-        updateCounter();
+        updateUI();
     }
 
     @FXML
@@ -88,7 +99,7 @@ public class CreateQuizController {
             }
 
             loadQuestion();
-            updateCounter();
+            updateUI();
         }
     }
 
@@ -99,8 +110,9 @@ public class CreateQuizController {
         if (this.currentIndex < this.quiz.getTotalQuestions() - 1) {
             this.currentIndex++;
             loadQuestion();
-            updateCounter();
         }
+
+        updateUI();
     }
 
     @FXML
@@ -110,15 +122,16 @@ public class CreateQuizController {
         if (this.currentIndex > 0) {
             this.currentIndex--;
             loadQuestion();
-            updateCounter();
         }
+
+        updateUI();
     }
 
     @FXML
     private void export() {
         saveCurrentQuestion();
 
-        if (this.quiz.getTotalQuestions() > 1) {
+        if (this.quiz.getTotalQuestions() >= 1) {
             if(this.titleField == null || this.titleField.getText().isEmpty()) {
                 QuizApp.showInfoPopup("Title field is required.");
                 return;
@@ -150,10 +163,14 @@ public class CreateQuizController {
         this.falseField3.setText(question.getIncorrectAnswers().get(2));
     }
 
-    private void updateCounter() {
+    private void updateUI() {
         this.questionCounter.setText((this.currentIndex + 1)
                 + " / "
                 + this.quiz.getTotalQuestions());
+
+        removeQuestionButton.setDisable(this.quiz.getTotalQuestions() <= 1);
+        previousButton.setDisable(this.currentIndex == 0);
+        nextButton.setDisable(this.currentIndex == this.quiz.getTotalQuestions() - 1);
     }
 
     private FileChooser createFileChooser() {

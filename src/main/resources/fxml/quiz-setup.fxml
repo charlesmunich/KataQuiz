@@ -56,6 +56,11 @@
                   <Font size="18.0" />
                </font>
             </Button>
+            <Button mnemonicParsing="false" onAction="#goHome" text="Home">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
    </children>

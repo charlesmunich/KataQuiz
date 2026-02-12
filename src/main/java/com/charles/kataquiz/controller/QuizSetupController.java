@@ -31,6 +31,11 @@ public class QuizSetupController {
     }
 
     @FXML
+    private void goHome(){
+        QuizApp.setScene("home.fxml");
+    }
+
+    @FXML
     public void beginQuiz(){
         try{
             if(!numQuestionsField.getText().isEmpty()){

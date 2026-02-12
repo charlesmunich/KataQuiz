@@ -21,6 +21,9 @@ import java.util.List;
 public class TriviaApiClient {
     private static final String CATEGORY_URL = "https://opentdb.com/api_category.php";
     private static final String QUESTION_URL = "https://opentdb.com/api.php";
+    public static final int SUCCESS_RESPONSE_CODE = 0;
+    public static final int NO_RESULTS_RESPONSE_CODE = 1;
+    public static final int RATE_LIMIT_RESPONSE_CODE = 5;
     private final HttpClient client = HttpClient.newHttpClient();
 
     public List<Category> fetchCategories() {
@@ -70,7 +73,21 @@ public class TriviaApiClient {
             JsonObject root = JsonParser.parseString(response.body()).getAsJsonObject();
 
             int responseCode = root.get("response_code").getAsInt();
-            if(responseCode != 0){
+
+            if(responseCode == NO_RESULTS_RESPONSE_CODE){
+                throw new TriviaApiException(
+                        "Open Trivia Database does not contain "
+                                + amount +
+                                " questions for the selected category."
+                );
+            }
+
+            if(responseCode == RATE_LIMIT_RESPONSE_CODE){
+                throw new TriviaApiException(
+                        "Rate limit exceeded. Please try again in a few seconds");
+            }
+
+            if(responseCode != SUCCESS_RESPONSE_CODE){
                 throw new TriviaApiException("Bad response code: " + responseCode);
             }
 

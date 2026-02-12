@@ -48,7 +48,12 @@
                </VBox.margin>
             </Button>
             <Label fx:id="questionNumber" text="Label" />
-            <Button mnemonicParsing="false" onAction="#previousQuestion" prefWidth="100.0" text="Back">
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#previousQuestion" prefWidth="100.0" text="Back">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#goHome" prefWidth="100.0" text="Home">
                <font>
                   <Font size="18.0" />
                </font>
