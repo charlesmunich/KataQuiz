@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charles.kataquiz.controller.HomeController">
+<VBox fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.charles.kataquiz.controller.HomeController">
    <children>
       <Label text="KataQuiz">
          <font>
             <Font name="Inter Regular" size="60.0" />
          </font>
          <VBox.margin>
-            <Insets bottom="20.0" />
+            <Insets bottom="10.0" />
          </VBox.margin></Label>
       <Button mnemonicParsing="false" onAction="#onTakeQuiz" prefHeight="45.0" prefWidth="140.0" text="Take Quiz">
          <font>

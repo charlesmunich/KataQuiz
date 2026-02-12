@@ -13,11 +13,22 @@ My submission for Direct Supply's Kata technical project.
 - Add question only adds a question to the end, remove question only removed the last question.
 - Export allows blank question and answers
 - could add more graceful handling of Response cod 1, not enough questions for category
+- would move file management to a util class
 
 # TODO
-- NO results code handling
 - Major UI refactoring
 - javadocs
 - CSS stylesheet
 - Final edge case test
 - jpackage (to exe)
+
+# UI
+- Font: Inter
+- Main Title: 60px
+- Main Buttons: 20px
+- Secondary Titles: 40px
+- Secondary Buttons / Text 18px
+
+# What I would have done differently
+- Anchor pane instead of VBOX/HBOX
+- 

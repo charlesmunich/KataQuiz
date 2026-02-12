@@ -139,9 +139,10 @@ public class QuizController {
         }
 
         this.questionNumber.setText(
-                this.quizService.getCurrentQuestionNumber()
-                        + " / "
-                        + this.quizService.getTotalNumberOfQuestions());
+                "Question: "
+                    + this.quizService.getCurrentQuestionNumber()
+                    + " / "
+                    + this.quizService.getTotalNumberOfQuestions());
     }
 
     public void startImportedQuiz(QuizService quizService) {
