@@ -7,6 +7,7 @@ import com.charles.kataquiz.repository.QuizRepository;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -15,6 +16,9 @@ public class CreateQuizController {
 
     private Quiz quiz;
     private int currentIndex;
+
+    @FXML
+    private VBox root;
 
     @FXML
     private TextField titleField;
@@ -115,8 +119,18 @@ public class CreateQuizController {
         saveCurrentQuestion();
 
         if (this.quiz.getTotalQuestions() > 1) {
+            if(this.titleField == null || this.titleField.getText().isEmpty()) {
+                QuizApp.showInfoPopup("Title field is required.");
+                return;
+            }
+
+            if(this.authorField == null || this.authorField.getText().isEmpty()) {
+                QuizApp.showInfoPopup("Author field is required.");
+                return;
+            }
+
             FileChooser fc = createFileChooser();
-            File file = fc.showSaveDialog(this.questionField.getScene().getWindow());
+            File file = fc.showSaveDialog(this.root.getScene().getWindow());
 
             if (file != null) {
                 new QuizRepository().saveQuiz(this.quiz, file.toPath());
@@ -144,17 +158,15 @@ public class CreateQuizController {
 
     private FileChooser createFileChooser() {
         FileChooser fs = new FileChooser();
-        //TODO title and author null
+
+        String title = this.titleField.getText().replaceAll("\\s", "-").toLowerCase();
+        String author = this.authorField.getText().replaceAll("\\s", "-").toLowerCase();
 
         fs.setInitialDirectory(new File(System.getProperty("user.home")));
         fs.setTitle("Save Quiz");
         fs.getExtensionFilters()
                 .add(new FileChooser.ExtensionFilter("KataQuiz", "*.json"));
-        fs.setInitialFileName(
-                this.titleField.getText().replaceAll("\\s", "-")
-                + "-"
-                + this.authorField.getText().replaceAll("\\s", "-")
-                + ".json");
+        fs.setInitialFileName(title + "-" + author + ".json");
 
         return fs;
     }

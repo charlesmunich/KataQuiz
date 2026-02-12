@@ -14,8 +14,9 @@ import java.util.List;
 
 public class QuizSetupController {
 
+    public static final int MIN_NUM_QUESTIONS = 0;
+    public static final int MAX_NUM_QUESTIONS = 50;
     private Category selectedCategory;
-
     private final QuizSetupService service = new QuizSetupService();
 
     @FXML
@@ -35,16 +36,20 @@ public class QuizSetupController {
             if(!numQuestionsField.getText().isEmpty()){
                 int numQuestions = Integer.parseInt(numQuestionsField.getText());
 
-                if(selectedCategory != null){
-                    List<Question> questions =
-                            this.service.createQuiz(selectedCategory, numQuestions);
+                if(numQuestions > MIN_NUM_QUESTIONS && numQuestions <= MAX_NUM_QUESTIONS){
+                    if(selectedCategory != null){
+                        List<Question> questions =
+                                this.service.createQuiz(selectedCategory, numQuestions);
 
-                    QuizApp.setScene("quiz.fxml", controller -> {
-                        QuizController quizController = (QuizController) controller;
-                        quizController.startQuiz(questions);
-                    });
+                        QuizApp.setScene("quiz.fxml", controller -> {
+                            QuizController quizController = (QuizController) controller;
+                            quizController.startQuiz(questions);
+                        });
+                    } else {
+                        QuizApp.showInfoPopup("Please select a category.");
+                    }
                 } else {
-                    QuizApp.showInfoPopup("Please select a category.");
+                    QuizApp.showInfoPopup("Please enter a number between 1 and 50");
                 }
             } else {
                 QuizApp.showInfoPopup("Number of questions must be defined.");

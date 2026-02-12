@@ -6,6 +6,7 @@ import com.charles.kataquiz.repository.QuizRepository;
 import com.charles.kataquiz.service.QuizService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -15,6 +16,9 @@ public class FinalScoreController {
     private static final int PERCENT_MULTIPLIER = 100;
 
     private QuizService quizService;
+
+    @FXML
+    private VBox root;
 
     @FXML
     private Label finalScoreLabel;
@@ -27,7 +31,7 @@ public class FinalScoreController {
     @FXML
     private void onExport() {
         FileChooser fc = createFileChooser();
-        File file = fc.showSaveDialog(this.finalScoreLabel.getScene().getWindow()); //TODO root
+        File file = fc.showSaveDialog(this.root.getScene().getWindow());
 
         Quiz quiz = new Quiz(this.quizService.getQuestions());
 
