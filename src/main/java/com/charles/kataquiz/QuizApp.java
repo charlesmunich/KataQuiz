@@ -34,11 +34,10 @@ public class QuizApp extends Application {
             Parent root = FXMLLoader.load(
                     Objects.requireNonNull(QuizApp.class.getResource("/fxml/" + fxml))
             );
-            Scene scene = new Scene(root);
 
             Application.setUserAgentStylesheet(USER_AGENT_STYLESHEET);
 
-            primaryStage.setScene(scene);
+            primaryStage.setScene(new Scene(root));
         } catch (NullPointerException | IOException e) {
             throw new RuntimeException("Failed to load " + fxml, e);
         }
@@ -54,12 +53,9 @@ public class QuizApp extends Application {
             T controller = loader.getController();
             controllerConsumer.accept(controller);
 
-            Scene scene = new Scene(root);
-
             Application.setUserAgentStylesheet(USER_AGENT_STYLESHEET);
 
-
-            primaryStage.setScene(scene);
+            primaryStage.setScene(new Scene(root));
         } catch (Exception e) {
             throw new RuntimeException("Failed to load " + fxml, e);
         }
