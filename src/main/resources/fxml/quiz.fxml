@@ -12,7 +12,7 @@
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
-            <Label fx:id="questionNumber" text="Label">
+            <Label fx:id="questionNumber" text="Question Number">
                <font>
                   <Font size="18.0" />
                </font>
@@ -20,7 +20,7 @@
                   <Insets />
                </VBox.margin>
             </Label>
-            <Label fx:id="questionLabel" minHeight="140.0" minWidth="560.0" prefHeight="77.0" prefWidth="56.0" text="Label" wrapText="true">
+            <Label fx:id="questionLabel" minHeight="140.0" minWidth="560.0" prefHeight="77.0" prefWidth="56.0" text="Question" wrapText="true">
                <font>
                   <Font size="22.0" />
                </font>
@@ -28,22 +28,22 @@
                   <Insets />
                </VBox.margin>
             </Label>
-            <RadioButton fx:id="radioButtonA" mnemonicParsing="false" text="RadioButton">
+            <RadioButton fx:id="radioButtonA" mnemonicParsing="false" text="Option 1">
                <font>
                   <Font size="18.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="radioButtonB" mnemonicParsing="false" text="RadioButton">
+            <RadioButton fx:id="radioButtonB" mnemonicParsing="false" text="Option 2">
                <font>
                   <Font size="18.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="radioButtonC" mnemonicParsing="false" text="RadioButton">
+            <RadioButton fx:id="radioButtonC" mnemonicParsing="false" text="Option 3">
                <font>
                   <Font size="18.0" />
                </font>
             </RadioButton>
-            <RadioButton fx:id="radioButtonD" mnemonicParsing="false" text="RadioButton">
+            <RadioButton fx:id="radioButtonD" mnemonicParsing="false" text="Option 4">
                <font>
                   <Font size="18.0" />
                </font>

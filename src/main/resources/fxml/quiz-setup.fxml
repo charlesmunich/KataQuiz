@@ -49,7 +49,7 @@
                   </TextField>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#beginQuiz" text="Begin">
+            <Button mnemonicParsing="false" onAction="#beginQuiz" prefWidth="100.0" text="Begin">
                <VBox.margin>
                   <Insets top="20.0" />
                </VBox.margin>

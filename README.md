@@ -10,7 +10,7 @@ My submission for Direct Supply's Kata technical project.
 - Right now, quiz titles and author are saved to the quiz filename, further implementation would store data to display quiz information to the user while taking the quiz
 - Title and author get set to lowercase in createquizcontroller, as they are only used for filenames.
 - OpenAI ChatGPT was used to assist in writing final documentation and readme
-- Add question only adds a question to the end, remove question only removed the last question.
+- Add question only adds a question to the end, not in between
 - Export allows blank question and answers
 - could add more graceful handling of Response cod 1, not enough questions for category
 - would move file management to a util class
