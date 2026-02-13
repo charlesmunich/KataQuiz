@@ -52,7 +52,7 @@ public class QuizController {
         nextButton.setDisable(true);
         backButton.setDisable(true);
 
-        answerGroup.selectedToggleProperty().addListener((_, _, newToggle) -> {
+        answerGroup.selectedToggleProperty().addListener((oldObservable, oldToggle, newToggle) -> {
             nextButton.setDisable(newToggle == null);
         });
 

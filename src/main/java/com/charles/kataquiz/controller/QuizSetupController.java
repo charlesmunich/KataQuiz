@@ -76,7 +76,7 @@ public class QuizSetupController {
             for(Category category : categories){
                 MenuItem item = new MenuItem(category.name());
 
-                item.setOnAction(_ -> {
+                item.setOnAction(actionEvent -> {
                     this.categoryMenu.setText(category.name());
                     this.selectedCategory = category;
                 });

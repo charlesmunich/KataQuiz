@@ -1,9 +1,13 @@
 # KataQuiz
 My submission for Direct Supply's Kata technical project.
 
+# Status
+No longer commiting new updates
+
 # Creation
-- Java + Gradle
+- Java 21 + Java FX 21 + Gradle
 - Created in IntelliJ Idea + Scenebuilder
+- Program was tested frequently during development, unresolved issues listed below. 
 - OpenAI ChatGPT was used to assist in writing final documentation and readme
 
 # External libraries
@@ -30,7 +34,6 @@ My submission for Direct Supply's Kata technical project.
 - Add question only adds a question to the end, not in between
 - Export allows blank question and answers
 - Quiz radio buttons and text not perfectly aligned
-
 
 # Notes
 - Title and author get set to lowercase in createquizcontroller, as they are only used for filenames.
