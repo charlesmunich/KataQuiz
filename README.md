@@ -10,13 +10,31 @@ This project was created as a technical submission for Direct Supply.
 
 ## Running the Application
 
-1.  Navigate to the **Releases** folder in this repository.
-2.  Download `KataQuiz.zip`.
-3.  Extract the zip file.
-4.  Open the extracted folder.
-5.  Double-click `KataQuiz.exe`.
-
 **Platform:** Windows
+
+### Option 1: Executable (.exe)
+
+1. Navigate to the **releases** section of this repository.
+2. Download `KataQuiz-exe.zip`.
+3. Extract the contents.
+4. Open the extracted folder.
+5. Double-click `KataQuiz.exe`.
+
+> Note: Some antivirus software may block the application because the executable is unsigned.
+
+---
+
+### Option 2: Batch Launcher (.bat)
+
+1. Navigate to the **releases** section of this repository.
+2. Download `KataQuiz-bat.zip`.
+3. Extract the contents.
+4. Open the extracted folder.
+5. Open the `bin` directory.
+6. Double-click `KataQuiz.bat`.
+
+> Note: This version displays console output and is recommended for debugging.
+
 
 ------------------------------------------------------------------------
 
@@ -64,6 +82,7 @@ README.
 -   Create custom quizzes
 -   Export quizzes to JSON format
 -   Persistent answer selection when navigating between questions
+- Answer validation is string-based, ensuring consistent correctness checking without additional identifier tracking.
 
 ------------------------------------------------------------------------
 
