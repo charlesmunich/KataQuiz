@@ -28,26 +28,30 @@
                   <Insets />
                </VBox.margin>
             </Label>
-            <RadioButton fx:id="radioButtonA" mnemonicParsing="false" text="Option 1">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </RadioButton>
-            <RadioButton fx:id="radioButtonB" mnemonicParsing="false" text="Option 2">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </RadioButton>
-            <RadioButton fx:id="radioButtonC" mnemonicParsing="false" text="Option 3">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </RadioButton>
-            <RadioButton fx:id="radioButtonD" mnemonicParsing="false" text="Option 4">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </RadioButton>
+            <VBox prefHeight="200.0" prefWidth="100.0" spacing="8.0">
+               <children>
+                  <RadioButton fx:id="radioButtonA" mnemonicParsing="false" text="Option 1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="radioButtonB" mnemonicParsing="false" text="Option 2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="radioButtonC" mnemonicParsing="false" text="Option 3">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton fx:id="radioButtonD" mnemonicParsing="false" text="Option 4">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </RadioButton>
+               </children>
+            </VBox>
          </children>
          <VBox.margin>
             <Insets left="70.0" right="70.0" top="50.0" />

@@ -14,9 +14,9 @@ My submission for Direct Supply's Kata technical project.
 - Export allows blank question and answers
 - could add more graceful handling of Response cod 1, not enough questions for category
 - would move file management to a util class
+- Category selection could be more graceful
 
 # TODO
-- Major UI refactoring
 - javadocs
 - CSS stylesheet
 - Final edge case test

@@ -1,5 +1,6 @@
 package com.charles.kataquiz;
 
+import atlantafx.base.theme.PrimerLight;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +13,7 @@ import java.util.Objects;
 import java.util.function.Consumer;
 
 public class QuizApp extends Application {
+    public static final String USER_AGENT_STYLESHEET = new PrimerLight().getUserAgentStylesheet();
     private static Stage primaryStage;
 
     @Override
@@ -32,7 +34,11 @@ public class QuizApp extends Application {
             Parent root = FXMLLoader.load(
                     Objects.requireNonNull(QuizApp.class.getResource("/fxml/" + fxml))
             );
-            primaryStage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+
+            Application.setUserAgentStylesheet(USER_AGENT_STYLESHEET);
+
+            primaryStage.setScene(scene);
         } catch (NullPointerException | IOException e) {
             throw new RuntimeException("Failed to load " + fxml, e);
         }
@@ -48,7 +54,12 @@ public class QuizApp extends Application {
             T controller = loader.getController();
             controllerConsumer.accept(controller);
 
-            primaryStage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+
+            Application.setUserAgentStylesheet(USER_AGENT_STYLESHEET);
+
+
+            primaryStage.setScene(scene);
         } catch (Exception e) {
             throw new RuntimeException("Failed to load " + fxml, e);
         }
@@ -59,6 +70,8 @@ public class QuizApp extends Application {
         alert.setTitle("Information");
         alert.setHeaderText(null);
         alert.setContentText(message);
+
+        Application.setUserAgentStylesheet(USER_AGENT_STYLESHEET);
 
         alert.getDialogPane().getStyleClass().add("root");
 

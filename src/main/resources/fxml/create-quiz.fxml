@@ -15,9 +15,9 @@
             <Font name="Inter Regular" size="40.0" />
          </font>
          <VBox.margin>
-            <Insets bottom="10.0" top="10.0" />
+            <Insets top="5.0" />
          </VBox.margin></Label>
-      <VBox alignment="CENTER" prefHeight="101.0" prefWidth="700.0" spacing="10.0">
+      <VBox alignment="CENTER" prefHeight="101.0" prefWidth="700.0" spacing="5.0">
          <children>
             <HBox alignment="CENTER" prefWidth="200.0">
                <children>
@@ -26,33 +26,32 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="titleField" prefHeight="39.0" prefWidth="276.0">
+                  <TextField fx:id="titleField" prefHeight="39.0" prefWidth="200.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </TextField>
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefWidth="200.0">
-               <children>
                   <Label text="Author: ">
                      <font>
                         <Font size="15.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
                   </Label>
-                  <TextField fx:id="authorField" prefHeight="39.0" prefWidth="258.0">
+                  <TextField fx:id="authorField" prefHeight="39.0" prefWidth="200.0">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </TextField>
                </children>
                <VBox.margin>
-                  <Insets bottom="6.0" />
+                  <Insets bottom="5.0" top="5.0" />
                </VBox.margin>
             </HBox>
          </children>
       </VBox>
-      <VBox prefHeight="422.0" prefWidth="600.0" style="-fx-background-color: #f0f0f0; -fx-border-color: #000000;">
+      <VBox prefHeight="422.0" prefWidth="600.0" style="-fx-background-color: #f0f0f0; -fx-border-color: #000000; -fx-border-radius: 10; -fx-background-radius: 10;">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
@@ -113,12 +112,12 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#addQuestion" prefWidth="140.0" text="Add Question">
+                  <Button mnemonicParsing="false" onAction="#addQuestion" prefWidth="150.0" text="Add Question">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Button>
-                  <Button fx:id="removeQuestionButton" mnemonicParsing="false" onAction="#removeQuestion" prefWidth="140.0" text="Remove Question">
+                  <Button fx:id="removeQuestionButton" mnemonicParsing="false" onAction="#removeQuestion" prefWidth="150.0" text="Remove Question">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -144,29 +143,28 @@
             <Insets left="50.0" right="50.0" />
          </VBox.margin>
       </VBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#export" text="Export">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <HBox.margin>
-                  <Insets top="3.0" />
-               </HBox.margin>
-            </Button>
-         </children>
-      </HBox>
-      <HBox alignment="BOTTOM_LEFT" prefHeight="50.0" prefWidth="700.0">
+      <HBox alignment="CENTER_LEFT">
          <children>
             <Button mnemonicParsing="false" onAction="#goHome" text="Home">
                <font>
                   <Font size="18.0" />
                </font>
+               <HBox.margin>
+                  <Insets right="240.0" />
+               </HBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#export" text="Export">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
             </Button>
          </children>
-         <padding>
-            <Insets bottom="5.0" left="5.0" />
-         </padding>
+         <VBox.margin>
+            <Insets bottom="5.0" left="5.0" top="5.0" />
+         </VBox.margin>
       </HBox>
    </children>
 </VBox>
