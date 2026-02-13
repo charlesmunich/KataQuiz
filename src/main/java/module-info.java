@@ -10,7 +10,7 @@ module com.charles.kataquiz {
     requires atlantafx.base;
 
     opens com.charles.kataquiz.controller to javafx.fxml;
-    opens com.charles.kataquiz.model to javafx.fxml;
+    opens com.charles.kataquiz.model to javafx.fxml, com.google.gson;
 
     exports com.charles.kataquiz;
 }
