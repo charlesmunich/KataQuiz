@@ -1,3 +1,8 @@
+/*
+ * Author: Charles Loeffler
+ * Last Updated: 02/12/2026
+ */
+
 package com.charles.kataquiz.service;
 
 import com.charles.kataquiz.QuizApp;
@@ -10,10 +15,20 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service responsible for importing a quiz from a file
+ * and starting it in the application.
+ */
 public class ImportService {
 
+    /**
+     * Loads a quiz from the given file path and starts it.
+     *
+     * @param path the path to the quiz file
+     * @throws RuntimeException if the quiz cannot be loaded
+     *         or the scene fails to initialize
+     */
     public static void startQuiz(Path path) {
-
         QuizRepository repository = new QuizRepository();
         Quiz quiz = repository.loadQuiz(path);
 

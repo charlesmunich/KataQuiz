@@ -1,39 +1,124 @@
 # KataQuiz
-My submission for Direct Supply's Kata technical project.
 
-# Status
-No longer commiting new updates
+KataQuiz is a JavaFX desktop application that allows users to take
+trivia quizzes using the Open Trivia Database API or create and export
+their own custom quizzes.
 
-# Creation
-- Java 21 + Java FX 21 + Gradle
-- Created in IntelliJ Idea + Scenebuilder
-- Program was tested frequently during development, unresolved issues listed below. 
-- OpenAI ChatGPT was used to assist in writing final documentation and readme
+This project was created as a technical submission for Direct Supply.
 
-# External libraries
-- GSON (Json handling)
-- Apache Commons Text (Json decoding)
-- JavaFX (UI)
-- Atlanta FX (styling)
-- jpackage (program packaging)
+------------------------------------------------------------------------
 
-# Future things to add
-- Could add some kind of loading bar / processing indication for API requests.
-- Can expand quiz size adding more API requests
-- Currently only supports multiple choice questions, open trivia database also offers true/false
-- Right now, quiz titles and author are saved to the quiz filename, further implementation would store data to display quiz information to the user while taking the quiz
-- Allow for reordering of questions
-- could add more graceful handling of Response cod 1, not enough questions for category
-- would move file management to a util class
-- Category selection could be more graceful and fit the screen better
-- Change layouts from HBOX/VBOX to anchor panes
+## Running the Application
 
-# Bugs/Things noticed
-- Selecting an answer and pressing back before next does not save the answer, can be fixed with an onaction when radio button is pressed
-- Possible to trigger too many api requests, can add protection limiting to one request per 5 seconds
-- Add question only adds a question to the end, not in between
-- Export allows blank question and answers
-- Quiz radio buttons and text not perfectly aligned
+1.  Navigate to the **Releases** folder in this repository.
+2.  Download `KataQuiz.zip`.
+3.  Extract the zip file.
+4.  Open the extracted folder.
+5.  Double-click `KataQuiz.exe`.
 
-# Notes
-- Title and author get set to lowercase in createquizcontroller, as they are only used for filenames.
+**Platform:** Windows
+
+------------------------------------------------------------------------
+
+## Project Status
+
+This project is complete.\
+No additional updates are currently being committed.
+
+------------------------------------------------------------------------
+
+## Technology Stack
+
+-   Java 21
+-   JavaFX 21
+-   Gradle
+-   IntelliJ IDEA
+-   SceneBuilder
+-   jpackage (for packaging)
+
+The program was tested frequently during development. Known limitations
+are listed below.
+
+OpenAI ChatGPT was used to assist in writing documentation and this
+README.
+
+------------------------------------------------------------------------
+
+## External Libraries
+
+-   **Gson** -- JSON serialization/deserialization
+-   **Apache Commons Text** -- HTML entity decoding
+-   **JavaFX** -- User interface framework
+-   **Atlantafx** -- UI styling theme
+-   **jpackage** -- Native Windows packaging
+
+------------------------------------------------------------------------
+
+## Features
+
+-   Take quizzes using the Open Trivia Database API
+-   Select trivia category and number of questions
+-   Automatic answer shuffling per question
+-   Score calculation with percentage display
+-   Import quizzes from JSON files
+-   Create custom quizzes
+-   Export quizzes to JSON format
+-   Persistent answer selection when navigating between questions
+
+------------------------------------------------------------------------
+
+## Architecture Overview
+
+The project follows a layered architecture:
+
+-   **Controller Layer** -- Handles UI interaction
+-   **Service Layer** -- Contains business logic
+-   **Repository Layer** -- Manages JSON persistence
+-   **Model Layer** -- Represents core data structures
+-   **Utility Layer** -- Shared helper logic
+-   **API Client** -- Handles communication with Open Trivia Database
+
+A UML Class Diagram is available at:
+
+docs/uml/uml-3.png
+
+------------------------------------------------------------------------
+
+## Known Issues / Limitations
+
+-   Selecting an answer and pressing back before pressing "Next" does
+    not save the answer.
+-   Possible to trigger too many API requests in rapid succession.
+-   "Add Question" only appends to the end of the quiz.
+-   Export allows blank questions and answers.
+-   Minor alignment issues in quiz radio buttons.
+-   Only supports multiple choice questions (True/False supported by API
+    but not implemented).
+-   Titles and authors are converted to lowercase when generating
+    filenames.
+-   Limited handling for API response code 1 (not enough questions
+    available).
+-   File management logic could be moved into a utility class.
+-   Category menu layout could be improved.
+-   Layouts currently use VBox/HBox, AnchorPane could improve
+    positioning.
+
+------------------------------------------------------------------------
+
+## Potential Enhancements
+
+-   Add loading indicator during API requests
+-   Implement API request rate limiting
+-   Support True/False question types
+-   Store quiz metadata (title/author) within the quiz model
+-   Allow reordering of questions
+-   Improve UI layout structure
+-   Add stronger export validation
+
+------------------------------------------------------------------------
+
+## Author
+
+Charles Loeffler\
+Software Engineering Student\
+Milwaukee School of Engineering

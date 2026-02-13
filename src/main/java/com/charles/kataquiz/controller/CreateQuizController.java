@@ -1,3 +1,8 @@
+/*
+ * Author: Charles Loeffler
+ * Last Updated: 02/12/2026
+ */
+
 package com.charles.kataquiz.controller;
 
 import com.charles.kataquiz.QuizApp;
@@ -13,6 +18,10 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 
+/**
+ * Controller responsible for creating a custom quiz.
+ * Allows adding, editing, removing, and exporting questions.
+ */
 public class CreateQuizController {
 
     private Quiz quiz;
@@ -54,6 +63,9 @@ public class CreateQuizController {
     @FXML
     private Label questionCounter;
 
+    /**
+     * Initializes the quiz and loads the first question.
+     */
     @FXML
     public void initialize() {
         this.quiz = new Quiz();
@@ -63,11 +75,17 @@ public class CreateQuizController {
         updateUI();
     }
 
+    /**
+     * Returns the user to the home screen.
+     */
     @FXML
     private void goHome(){
         QuizApp.setScene("home.fxml");
     }
 
+    /**
+     * Saves the current question's input fields to the model.
+     */
     private void saveCurrentQuestion() {
         Question question = quiz.getQuestions().get(this.currentIndex);
 
@@ -78,6 +96,9 @@ public class CreateQuizController {
         question.setIncorrectAnswer(2, falseField3.getText());
     }
 
+    /**
+     * Adds a new question to the quiz.
+     */
     @FXML
     private void addQuestion() {
         saveCurrentQuestion();
@@ -89,6 +110,9 @@ public class CreateQuizController {
         updateUI();
     }
 
+    /**
+     * Removes the current question if more than one exists.
+     */
     @FXML
     private void removeQuestion() {
         if (this.quiz.getTotalQuestions() > 1) {
@@ -103,6 +127,9 @@ public class CreateQuizController {
         }
     }
 
+    /**
+     * Moves to the next question.
+     */
     @FXML
     private void nextQuestion() {
         saveCurrentQuestion();
@@ -115,6 +142,9 @@ public class CreateQuizController {
         updateUI();
     }
 
+    /**
+     * Moves to the previous question.
+     */
     @FXML
     private void previousQuestion() {
         saveCurrentQuestion();
@@ -127,6 +157,9 @@ public class CreateQuizController {
         updateUI();
     }
 
+    /**
+     * Exports the created quiz to a JSON file.
+     */
     @FXML
     private void export() {
         saveCurrentQuestion();
@@ -153,6 +186,9 @@ public class CreateQuizController {
         }
     }
 
+    /**
+     * Loads the current question into the input fields.
+     */
     private void loadQuestion() {
         Question question = this.quiz.getQuestions().get(this.currentIndex);
 
@@ -163,6 +199,9 @@ public class CreateQuizController {
         this.falseField3.setText(question.getIncorrectAnswers().get(2));
     }
 
+    /**
+     * Updates button states and question counter.
+     */
     private void updateUI() {
         this.questionCounter.setText((this.currentIndex + 1)
                 + " / "
@@ -173,6 +212,11 @@ public class CreateQuizController {
         nextButton.setDisable(this.currentIndex == this.quiz.getTotalQuestions() - 1);
     }
 
+    /**
+     * Creates and configures a file chooser for exporting quizzes.
+     *
+     * @return a configured FileChooser
+     */
     private FileChooser createFileChooser() {
         FileChooser fs = new FileChooser();
 

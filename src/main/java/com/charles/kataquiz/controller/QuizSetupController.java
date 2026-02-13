@@ -1,3 +1,8 @@
+/*
+ * Author: Charles Loeffler
+ * Last Updated: 02/12/2026
+ */
+
 package com.charles.kataquiz.controller;
 
 import com.charles.kataquiz.Exception.TriviaApiException;
@@ -12,10 +17,15 @@ import javafx.scene.control.TextField;
 
 import java.util.List;
 
+/**
+ * Controller responsible for handling quiz setup.
+ * Allows the user to select a category and number of questions
+ * before starting the quiz.
+ */
 public class QuizSetupController {
 
-    public static final int MIN_NUM_QUESTIONS = 0;
-    public static final int MAX_NUM_QUESTIONS = 50;
+    private static final int MIN_NUM_QUESTIONS = 0;
+    private static final int MAX_NUM_QUESTIONS = 50;
     private Category selectedCategory;
     private final QuizSetupService service = new QuizSetupService();
 
@@ -25,16 +35,25 @@ public class QuizSetupController {
     @FXML
     private TextField numQuestionsField;
 
+    /**
+     * Initializes the controller and loads available categories.
+     */
     @FXML
     public void initialize() {
         addCategories();
     }
 
+    /**
+     * Returns the user to the home screen.
+     */
     @FXML
     private void goHome(){
         QuizApp.setScene("home.fxml");
     }
 
+    /**
+     * Validates input and starts the quiz if valid.
+     */
     @FXML
     public void beginQuiz(){
         try{
@@ -67,6 +86,9 @@ public class QuizSetupController {
         }
     }
 
+    /**
+     * Fetches categories from the API and populates the category menu.
+     */
     private void addCategories(){
         this.categoryMenu.getItems().clear();
 

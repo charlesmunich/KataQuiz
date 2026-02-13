@@ -1,3 +1,8 @@
+/*
+ * Author: Charles Loeffler
+ * Last Updated: 02/12/2026
+ */
+
 package com.charles.kataquiz.service;
 
 import com.charles.kataquiz.Exception.TriviaApiException;
@@ -18,14 +23,24 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Client used to communicate with the Open Trivia Database API.
+ * This class handles fetching categories and quiz questions.
+ */
 public class TriviaApiClient {
     private static final String CATEGORY_URL = "https://opentdb.com/api_category.php";
     private static final String QUESTION_URL = "https://opentdb.com/api.php";
-    public static final int SUCCESS_RESPONSE_CODE = 0;
-    public static final int NO_RESULTS_RESPONSE_CODE = 1;
-    public static final int RATE_LIMIT_RESPONSE_CODE = 5;
+    private static final int SUCCESS_RESPONSE_CODE = 0;
+    private static final int NO_RESULTS_RESPONSE_CODE = 1;
+    private static final int RATE_LIMIT_RESPONSE_CODE = 5;
     private final HttpClient client = HttpClient.newHttpClient();
 
+    /**
+     * Fetches all available trivia categories from the API.
+     *
+     * @return a list of available categories
+     * @throws TriviaApiException if the request fails or is interrupted
+     */
     public List<Category> fetchCategories() {
         try{
             HttpRequest request =
@@ -56,6 +71,15 @@ public class TriviaApiClient {
         }
     }
 
+    /**
+     * Fetches multiple-choice questions for a given category.
+     *
+     * @param categoryId the category ID
+     * @param amount the number of questions requested
+     * @return a list of questions
+     * @throws TriviaApiException if the request fails, is interrupted,
+     *         or if the API returns an error response code
+     */
     public List<Question> fetchQuestions(int categoryId, int amount){
         try{
             String url =

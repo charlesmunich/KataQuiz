@@ -1,3 +1,8 @@
+/*
+ * Author: Charles Loeffler
+ * Last Updated: 02/12/2026
+ */
+
 package com.charles.kataquiz.controller;
 
 import com.charles.kataquiz.QuizApp;
@@ -11,6 +16,10 @@ import javafx.scene.control.ToggleGroup;
 
 import java.util.List;
 
+/**
+ * Controller responsible for running a quiz.
+ * Handles question display, navigation, and answer submission.
+ */
 public class QuizController {
     private QuizService quizService;
 
@@ -40,6 +49,9 @@ public class QuizController {
 
     private ToggleGroup answerGroup;
 
+    /**
+     * Initializes radio buttons and listeners.
+     */
     @FXML
     private void initialize() {
         this.answerGroup = new ToggleGroup();
@@ -58,11 +70,18 @@ public class QuizController {
 
     }
 
+    /**
+     * Returns the user to the home screen.
+     */
     @FXML
     private void goHome(){
         QuizApp.setScene("home.fxml");
     }
 
+    /**
+     * Saves the selected answer and moves to the next question
+     * or final score screen.
+     */
     @FXML
     public void nextQuestion(){
         if(this.answerGroup.getSelectedToggle() != null){
@@ -88,6 +107,9 @@ public class QuizController {
         updateBackButton();
     }
 
+    /**
+     * Moves to the previous question if possible.
+     */
     @FXML
     public void previousQuestion(){
         if(!this.quizService.isFirstQuestion()){
@@ -97,11 +119,19 @@ public class QuizController {
         updateBackButton();
     }
 
+    /**
+     * Starts a new quiz using the given questions.
+     *
+     * @param questions the list of quiz questions
+     */
     public void startQuiz(List<Question> questions){
         this.quizService = new QuizService(questions);
         loadQuestion();
     }
 
+    /**
+     * Loads and displays the current question.
+     */
     private void loadQuestion() {
         this.answerGroup.selectToggle(null);
 
@@ -145,11 +175,19 @@ public class QuizController {
                     + this.quizService.getTotalNumberOfQuestions());
     }
 
+    /**
+     * Starts a quiz that was imported from a file.
+     *
+     * @param quizService the quiz service containing loaded questions
+     */
     public void startImportedQuiz(QuizService quizService) {
         this.quizService = quizService;
         loadQuestion();
     }
 
+    /**
+     * Updates the back button enabled state.
+     */
     private void updateBackButton(){
         backButton.setDisable(this.quizService.isFirstQuestion());
     }

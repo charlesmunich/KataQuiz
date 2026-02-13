@@ -1,3 +1,8 @@
+/*
+ * Author: Charles Loeffler
+ * Last Updated: 02/12/2026
+ */
+
 package com.charles.kataquiz.controller;
 
 import com.charles.kataquiz.QuizApp;
@@ -11,6 +16,10 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 
+/**
+ * Controller responsible for displaying the final score
+ * and allowing quiz export.
+ */
 public class FinalScoreController {
 
     private static final int PERCENT_MULTIPLIER = 100;
@@ -23,11 +32,17 @@ public class FinalScoreController {
     @FXML
     private Label finalScoreLabel;
 
+    /**
+     * Returns the user to the home screen.
+     */
     @FXML
     private void goHome(){
         QuizApp.setScene("home.fxml");
     }
 
+    /**
+     * Exports the completed quiz to a JSON file.
+     */
     @FXML
     private void onExport() {
         FileChooser fc = createFileChooser();
@@ -42,6 +57,11 @@ public class FinalScoreController {
         }
     }
 
+    /**
+     * Initializes the final score screen with quiz results.
+     *
+     * @param quiz the completed quiz service
+     */
     public void init(QuizService quiz) {
         this.quizService = quiz;
 
@@ -56,6 +76,11 @@ public class FinalScoreController {
                         quizPercent));
     }
 
+    /**
+     * Creates and configures a file chooser for saving JSON files.
+     *
+     * @return a configured FileChooser
+     */
     private FileChooser createFileChooser() {
         FileChooser fs = new FileChooser();
 
